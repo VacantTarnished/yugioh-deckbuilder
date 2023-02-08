@@ -1,6 +1,7 @@
 package at.htlleonding.yugioh.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class BannedCard {
@@ -10,6 +11,9 @@ public class BannedCard {
     private Long id;
     private String name;
     private Long allowedAmount;
+
+    @ManyToMany
+    private List<BanList> banLists;
 
     public Long getId() {
         return id;
@@ -33,5 +37,13 @@ public class BannedCard {
 
     public void setAllowedAmount(Long allowedAmount) {
         this.allowedAmount = allowedAmount;
+    }
+
+    public List<BanList> getBanLists() {
+        return banLists;
+    }
+
+    public void setBanLists(List<BanList> banLists) {
+        this.banLists = banLists;
     }
 }
