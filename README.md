@@ -68,5 +68,5 @@ A basic DB that saves cards from the trading card game **"YuGiOh"** and can save
 - Card manyToOne PrintSet (In which Set was the card printed)  
 - Card manyToMany CardType (A card can have multiple types and a type can be assigned to multiple cards)  
 - Card manyToOne (A card can only have 1 Attribute and multiple cards can have the same attribute)  
-- Card manyToMany BannedCard (A card with a given name is banned)  
+- Card manyToOne BannedCard (A card with a given name is banned)  
 - BannedCard manyToMany BanList (Multiple BannedCards are in a Banlist, and banned Cards could also have been banned in older BanLists)  
