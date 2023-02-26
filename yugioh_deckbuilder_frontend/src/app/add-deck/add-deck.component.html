@@ -1,0 +1,47 @@
+<h1>Yu-Gi-Oh! Deckbuilder</h1>
+<br />
+<p>
+  <mat-form-field appearance="fill">
+    <mat-label>Deck Name:</mat-label>
+    <input matInput />
+  </mat-form-field>
+  <button mat-flat-button color="primary">Add new Deck</button>
+</p>
+<br />
+  <mat-card class="inline-block">
+    <mat-card-content>
+      <div class="example-container">
+        <h2>Main Deck: </h2>
+
+        <div
+          cdkDropList
+          #todoList="cdkDropList"
+          [cdkDropListData]="mainDeck"
+          [cdkDropListConnectedTo]="[doneList]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of mainDeck" cdkDrag>{{item}}</div>
+        </div>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+
+<mat-card class="inline-block">
+  <mat-card-content>
+    <div class="example-container">
+      <h2>Cards: </h2>
+
+      <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="cards"
+        [cdkDropListConnectedTo]="[todoList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of cards" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
