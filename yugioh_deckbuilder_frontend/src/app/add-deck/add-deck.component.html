@@ -8,40 +8,67 @@
   <button mat-flat-button color="primary">Add new Deck</button>
 </p>
 <br />
-  <mat-card class="inline-block">
+<div class="float-container">
+  <mat-card>
     <mat-card-content>
       <div class="example-container">
-        <h2>Main Deck: </h2>
+        <h2>Main Deck:</h2>
 
         <div
           cdkDropList
-          #todoList="cdkDropList"
+          #main="cdkDropList"
           [cdkDropListData]="mainDeck"
-          [cdkDropListConnectedTo]="[doneList]"
+          [cdkDropListConnectedTo]="[allCards, side]"
           class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let item of mainDeck" cdkDrag>{{item}}</div>
+          (cdkDropListDropped)="remove($event)"
+        >
+          <div class="example-box" *ngFor="let item of mainDeck" cdkDrag>
+            {{ item }}
+          </div>
         </div>
       </div>
-
     </mat-card-content>
   </mat-card>
-
-<mat-card class="inline-block">
-  <mat-card-content>
-    <div class="example-container">
-      <h2>Cards: </h2>
-
-      <div
-        cdkDropList
-        #doneList="cdkDropList"
-        [cdkDropListData]="cards"
-        [cdkDropListConnectedTo]="[todoList]"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of cards" cdkDrag>{{item}}</div>
+  <br /><br />
+  <mat-card>
+    <mat-card-content>
+      <div class="example-container">
+        <h2>Side Deck:</h2>
+        <div
+          cdkDropList
+          #side="cdkDropList"
+          [cdkDropListData]="sideDeck"
+          [cdkDropListConnectedTo]="[allCards, main]"
+          class="example-list"
+          (cdkDropListDropped)="remove($event)"
+        >
+          <div class="example-box" *ngFor="let item of sideDeck" cdkDrag>
+            {{ item }}
+          </div>
+        </div>
       </div>
-    </div>
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="float-container">
+  <mat-card>
+    <mat-card-content>
+      <div class="example-container">
+        <h2>Cards:</h2>
 
+        <div
+          cdkDropList
+          #allCards="cdkDropList"
+          [cdkDropListData]="cards"
+          [cdkDropListConnectedTo]="[main, side]"
+          class="example-list"
+          (cdkDropListDropped)="remove($event)"
+        >
+          <div class="example-box" *ngFor="let item of cards" cdkDrag>
+            {{ item }}
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

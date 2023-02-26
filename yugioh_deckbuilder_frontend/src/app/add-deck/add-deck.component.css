@@ -54,17 +54,6 @@
 }
 
 
-.inline-block {
-  width: 680px;
-  display: inline-block;
-}
-
-.inline-block:last-of-type {
-  max-width: 300px;
-  margin-left: 20px;
-  display: inline-block;
-}
-
 button{
   margin-left: 10px;
   margin-bottom: 15px;
@@ -72,4 +61,10 @@ button{
 
 p{
   padding-left: 640px;
+}
+
+.float-container {
+  width: 45%;
+  float: left;
+  padding: 20px;
 }
