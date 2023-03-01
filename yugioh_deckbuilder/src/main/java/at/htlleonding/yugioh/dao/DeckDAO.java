@@ -26,10 +26,6 @@ public class DeckDAO {
         em.remove(deck);
     }
 
-    public void updateDeck(Deck deck) {
-        em.merge(deck);
-    }
-
     public void setCards(Long deckId, List<Card> cards) {
         Deck deck = findById(deckId);
         deck.setCards(cards);

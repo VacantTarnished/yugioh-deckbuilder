@@ -36,8 +36,4 @@ public class DeckRepo {
     public List<Deck> getAllDecks() {
         return deckDAO.getAllDecks();
     }
-
-    public void updateDeck(Deck deck) {
-        deckDAO.updateDeck(deck);
-    }
 }
