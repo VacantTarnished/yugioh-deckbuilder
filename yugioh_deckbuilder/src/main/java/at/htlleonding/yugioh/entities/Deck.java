@@ -12,7 +12,7 @@ public class Deck {
 
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Card> cards;
 
     public Long getId() {

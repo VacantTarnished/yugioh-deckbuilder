@@ -12,7 +12,7 @@ public class CardType {
 
     private String type;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Card> cards;
 
     public Long getId() {

@@ -6,6 +6,7 @@ import at.htlleonding.yugioh.entities.Deck;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
@@ -17,15 +18,18 @@ public class DeckDAO {
         return em.find(Deck.class, id);
     }
 
+    @Transactional
     public Deck addDeck(Deck deck) {
         em.persist(deck);
         return deck;
     }
 
+    @Transactional
     public void removeDeck(Long deck) {
         em.remove(deck);
     }
 
+    @Transactional
     public void setCards(Long deckId, List<Card> cards) {
         Deck deck = findById(deckId);
         deck.setCards(cards);

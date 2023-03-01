@@ -12,7 +12,7 @@ public class CardAttribute {
 
     private String attribute;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Card> cards;
 
     public Long getId() {

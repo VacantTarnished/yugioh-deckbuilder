@@ -5,6 +5,7 @@ import at.htlleonding.yugioh.entities.*;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
@@ -16,17 +17,15 @@ public class CardDAO {
         return em.find(Card.class, id);
     }
 
+    @Transactional
     public Card addCard(Card card) {
         em.persist(card);
         return card;
     }
 
+    @Transactional
     public void removeCard(Long card) {
         em.remove(card);
-    }
-
-    public Card updateCard(Card card) {
-        return em.merge(card);
     }
 
     public CardAttribute getCardAttribute(Long cardId) {
@@ -34,12 +33,14 @@ public class CardDAO {
         return card.getCardAttribute();
     }
 
+    @Transactional
     public void setCardAttribute(Long cardId, CardAttribute cardAttribute) {
         Card card = findById(cardId);
         card.setCardAttribute(cardAttribute);
         em.merge(card);
     }
 
+    @Transactional
     public void setCardType(Long id,List<CardType> cardTypes) {
         Card card = findById(id);
         card.setCardType(cardTypes);
@@ -55,6 +56,7 @@ public class CardDAO {
         return em.createNativeQuery("SELECT * FROM card", Card.class).getResultList();
     }
 
+    @Transactional
     public void setPrintSet(Long id, PrintSet printSet){
         Card card = findById(id);
         card.setPrintSet(printSet);
@@ -71,6 +73,7 @@ public class CardDAO {
         return card.getBannedCard();
     }
 
+    @Transactional
     public void setBannedCard(Long id, BannedCard bannedCard){
         Card card = findById(id);
         card.setBannedCard(bannedCard);

@@ -7,6 +7,7 @@ import at.htlleonding.yugioh.entities.Card;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
@@ -18,11 +19,13 @@ public class BanListDAO {
         return em.find(BanList.class, id);
     }
 
+    @Transactional
     public BanList addBanList(BanList banList) {
         em.persist(banList);
         return banList;
     }
 
+    @Transactional
     public void removeBanList(Long id) {
         em.remove(id);
     }
@@ -32,6 +35,7 @@ public class BanListDAO {
         return banList.getBannedCards();
     }
 
+    @Transactional
     public void setBannedCards (Long id, List<BannedCard> bannedCards) {
         BanList banList = findById(id);
         banList.setBannedCards(bannedCards);

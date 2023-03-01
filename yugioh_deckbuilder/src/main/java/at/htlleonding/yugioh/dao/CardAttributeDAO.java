@@ -6,6 +6,7 @@ import at.htlleonding.yugioh.entities.CardAttribute;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
@@ -17,15 +18,18 @@ public class CardAttributeDAO {
         return em.find(CardAttribute.class, id);
     }
 
+    @Transactional
     public CardAttribute addCardAttribute(CardAttribute cardAttribute) {
         em.persist(cardAttribute);
         return cardAttribute;
     }
 
+    @Transactional
     public void removeCardAttribute(Long cardAttribute) {
         em.remove(cardAttribute);
     }
 
+    @Transactional
     public void setCards(Long cardAttributeId, List<Card> cards) {
         CardAttribute cardAttribute = findById(cardAttributeId);
         cardAttribute.setCards(cards);

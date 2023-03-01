@@ -26,16 +26,16 @@ public class Card {
     private String imageURL;
     private String icon;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private CardAttribute cardAttribute;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<CardType> cardType;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private PrintSet printSet;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private BannedCard bannedCard;
 
     public long getId() {
