@@ -1,8 +1,6 @@
 package at.htlleonding.yugioh.dao;
 
-import at.htlleonding.yugioh.entities.BanList;
 import at.htlleonding.yugioh.entities.BannedCard;
-import at.htlleonding.yugioh.entities.Card;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -30,15 +28,7 @@ public class BannedCardDAO {
         em.remove(bannedCard);
     }
 
-    @Transactional
-    public void setBanLists(Long banCardId, List<BanList> banList) {
-        BannedCard bannedCard = findById(banCardId);
-        bannedCard.setBanLists(banList);
-        em.merge(bannedCard);
-    }
-
-    public List<BanList> getBanLists(Long banCardId) {
-        BannedCard bannedCard = findById(banCardId);
-        return bannedCard.getBanLists();
+    public List<BannedCard> getAllBannedCards() {
+        return em.createNativeQuery("select * from bannedCard", BannedCard.class).getResultList();
     }
 }

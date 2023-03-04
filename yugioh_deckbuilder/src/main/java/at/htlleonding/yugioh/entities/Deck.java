@@ -1,19 +1,25 @@
 package at.htlleonding.yugioh.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Deck {
     @Id
-    @Column(name = "deck_id")
     @GeneratedValue(generator = "Deck_seq", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Card> cards;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"deck", "id"})
+    private List<DeckCard> cards;
 
     public Long getId() {
         return id;
@@ -31,11 +37,11 @@ public class Deck {
         this.name = name;
     }
 
-    public List<Card> getCards() {
+    public List<DeckCard> getCards() {
         return cards;
     }
 
-    public void setCards(List<Card> cards) {
+    public void setCards(List<DeckCard> cards) {
         this.cards = cards;
     }
 }

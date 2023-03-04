@@ -16,8 +16,8 @@ public class PrintSetEndpoint {
     @POST
     @Path("/")
     @Consumes("application/json")
-    public void addPrintSet(PrintSet printSet) {
-        printSetRepo.addPrintSet(printSet);
+    public PrintSet addPrintSet(PrintSet printSet) {
+        return printSetRepo.addPrintSet(printSet);
     }
 
     @DELETE
@@ -33,17 +33,4 @@ public class PrintSetEndpoint {
         return printSetRepo.findById(id);
     }
 
-    @POST
-    @Path("/{id}")
-    @Consumes("application/json")
-    public void setCard(@PathParam("id") Long id, List<Card> card) {
-        printSetRepo.setCards(id, card);
-    }
-
-    @GET
-    @Path("/cards/{id}")
-    @Produces("application/json")
-    public List<Card> getCards(@PathParam("id") Long id) {
-        return printSetRepo.getCards(id);
-    }
 }

@@ -1,7 +1,6 @@
 package at.htlleonding.yugioh.repositories;
 
 import at.htlleonding.yugioh.dao.BannedCardDAO;
-import at.htlleonding.yugioh.entities.BanList;
 import at.htlleonding.yugioh.entities.BannedCard;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -25,11 +24,8 @@ public class BannedCardRepo {
         return bannedCardDAO.findById(id);
     }
 
-    public void setBanLists(Long banCardId, List<BanList> banList) {
-        bannedCardDAO.setBanLists(banCardId, banList);
+    public List<BannedCard> getAllBannedCards() {
+        return bannedCardDAO.getAllBannedCards();
     }
 
-    public List<BanList> getBanLists(Long banCardId) {
-        return bannedCardDAO.getBanLists(banCardId);
-    }
 }

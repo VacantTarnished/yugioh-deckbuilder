@@ -29,15 +29,4 @@ public class CardAttributeDAO {
         em.remove(cardAttribute);
     }
 
-    @Transactional
-    public void setCards(Long cardAttributeId, List<Card> cards) {
-        CardAttribute cardAttribute = findById(cardAttributeId);
-        cardAttribute.setCards(cards);
-        em.merge(cardAttribute);
-    }
-
-    public List<Card> getCards(Long cardAttributeId) {
-        CardAttribute cardAttribute = findById(cardAttributeId);
-        return cardAttribute.getCards();
-    }
 }

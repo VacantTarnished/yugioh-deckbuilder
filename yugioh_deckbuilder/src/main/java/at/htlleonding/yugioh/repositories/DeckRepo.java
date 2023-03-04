@@ -1,19 +1,22 @@
 package at.htlleonding.yugioh.repositories;
 
 import at.htlleonding.yugioh.dao.DeckDAO;
+import at.htlleonding.yugioh.dto.DeckDTO;
 import at.htlleonding.yugioh.entities.Card;
 import at.htlleonding.yugioh.entities.Deck;
+import at.htlleonding.yugioh.entities.DeckCard;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Set;
 
 @ApplicationScoped
 public class DeckRepo {
     @Inject
     DeckDAO deckDAO;
 
-    public void addDeck(Deck deck) {
+    public void addDeck(DeckDTO deck) {
         deckDAO.addDeck(deck);
     }
 
@@ -25,11 +28,11 @@ public class DeckRepo {
         return deckDAO.findById(id);
     }
 
-    public void setCards(Long deckId, List<Card> cards) {
-        deckDAO.setCards(deckId, cards);
+    public Deck setCards(Long deckId, List<Card> cards) {
+        return deckDAO.setCards(deckId, cards);
     }
 
-    public List<Card> getCards(Long id) {
+    public List<DeckCard> getCards(Long id) {
         return deckDAO.getCards(id);
     }
 

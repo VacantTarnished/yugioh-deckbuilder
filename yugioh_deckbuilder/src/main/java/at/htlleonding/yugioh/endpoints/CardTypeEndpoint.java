@@ -16,8 +16,8 @@ public class CardTypeEndpoint {
     @POST
     @Path("/")
     @Consumes("application/json")
-    public void addCardType(CardType cardType) {
-        cardTypeRepo.addCardType(cardType);
+    public CardType addCardType(CardType cardType) {
+        return cardTypeRepo.addCardType(cardType);
     }
 
     @DELETE
@@ -33,17 +33,5 @@ public class CardTypeEndpoint {
         cardTypeRepo.findById(id);
     }
 
-    @POST
-    @Path("/{id}")
-    @Consumes("application/json")
-    public void setCards(@PathParam("id") Long id, List<Card> cards) {
-        cardTypeRepo.setCards(id, cards);
-    }
 
-    @GET
-    @Path("/cards/{id}")
-    @Produces("application/json")
-    public List<Card> getCards(@PathParam("id") Long id) {
-        return cardTypeRepo.getCards(id);
-    }
 }

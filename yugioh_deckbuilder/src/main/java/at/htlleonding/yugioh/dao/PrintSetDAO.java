@@ -29,15 +29,4 @@ public class PrintSetDAO {
         em.remove(printSet);
     }
 
-    @Transactional
-    public void setCards(Long printSetId, List<Card> cards) {
-        PrintSet printSet = findById(printSetId);
-        printSet.setCards(cards);
-        em.merge(printSet);
-    }
-
-    public List<Card> getCards(Long printSetId) {
-        PrintSet printSet = findById(printSetId);
-        return printSet.getCards();
-    }
 }

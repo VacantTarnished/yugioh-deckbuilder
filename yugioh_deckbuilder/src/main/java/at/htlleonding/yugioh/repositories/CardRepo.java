@@ -12,8 +12,8 @@ public class CardRepo {
     @Inject
     CardDAO cardDAO;
 
-    public void addCard(Card card) {
-        cardDAO.addCard(card);
+    public Card addCard(Card card) {
+        return cardDAO.addCard(card);
     }
 
     public void removeCard(Long id) {

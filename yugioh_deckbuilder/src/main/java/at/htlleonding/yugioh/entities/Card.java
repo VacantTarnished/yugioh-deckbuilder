@@ -8,16 +8,17 @@ import java.util.List;
 public class Card {
 
     @Id
-    @Column(name = "card_id")
     @GeneratedValue(generator = "cardID_seq", strategy = GenerationType.SEQUENCE)
     private long id;
 
     @Column(name = "printSet_card_id")
-    private Long cardID;
+    private String cardID;
     private String rarity;
     private String langShort;
     private Boolean firstEdition;
-    private String summonCost;
+    private String summonType;
+
+    @Column(length = 1024)
     private String description;
     private Long atk;
     private Long def;
@@ -46,11 +47,11 @@ public class Card {
         this.id = id;
     }
 
-    public Long getCardID() {
+    public String getCardID() {
         return cardID;
     }
 
-    public void setCardID(Long cardID) {
+    public void setCardID(String cardID) {
         this.cardID = cardID;
     }
 
@@ -78,12 +79,12 @@ public class Card {
         this.firstEdition = firstEdition;
     }
 
-    public String getSummonCost() {
-        return summonCost;
+    public String getSummonType() {
+        return summonType;
     }
 
-    public void setSummonCost(String summonCost) {
-        this.summonCost = summonCost;
+    public void setSummonType(String summonType) {
+        this.summonType = summonType;
     }
 
     public String getDescription() {

@@ -13,8 +13,8 @@ public class PrintSetRepo {
     @Inject
     PrintSetDAO printSetDAO;
 
-    public void addPrintSet(PrintSet printSet) {
-        printSetDAO.addPrintSet(printSet);
+    public PrintSet addPrintSet(PrintSet printSet) {
+        return printSetDAO.addPrintSet(printSet);
     }
 
     public void removePrintSet(Long id) {
@@ -25,11 +25,4 @@ public class PrintSetRepo {
         return printSetDAO.findById(id);
     }
 
-    public void setCards(Long printSetId, List<Card> cards) {
-        printSetDAO.setCards(printSetId, cards);
-    }
-
-    public List<Card> getCards(Long printSetId) {
-        return printSetDAO.getCards(printSetId);
-    }
 }

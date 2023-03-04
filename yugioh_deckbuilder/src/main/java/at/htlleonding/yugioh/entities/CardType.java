@@ -6,14 +6,10 @@ import java.util.List;
 @Entity
 public class CardType {
     @Id
-    @Column(name = "cardType_id")
     @GeneratedValue(generator = "CardType_seq", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String type;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Card> cards;
 
     public Long getId() {
         return id;
@@ -31,11 +27,4 @@ public class CardType {
         this.type = type;
     }
 
-    public List<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
-    }
 }

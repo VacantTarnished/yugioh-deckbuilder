@@ -24,11 +24,4 @@ public class CardAttributeRepo {
         return cardAttributeDAO.findById(id);
     }
 
-    public void setCards(Long id, List<Card> cards) {
-        cardAttributeDAO.setCards(id, cards);
-    }
-
-    public List<Card> getCards(Long id) {
-        return cardAttributeDAO.getCards(id);
-    }
 }

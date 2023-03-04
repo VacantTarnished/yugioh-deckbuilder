@@ -1,12 +1,15 @@
 package at.htlleonding.yugioh.endpoints;
 
+import at.htlleonding.yugioh.dto.DeckDTO;
 import at.htlleonding.yugioh.entities.Card;
 import at.htlleonding.yugioh.entities.Deck;
+import at.htlleonding.yugioh.entities.DeckCard;
 import at.htlleonding.yugioh.repositories.DeckRepo;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import java.util.List;
+import java.util.Set;
 
 @Path("/YuGiOh-DeckBuilder/Deck")
 public class DeckEndpoint {
@@ -15,13 +18,15 @@ public class DeckEndpoint {
 
     @POST
     @Path("/")
+    @Produces("application/json")
     @Consumes("application/json")
-    public void addDeck(Deck deck) {
+    public void addDeck(DeckDTO deck) {
         deckRepo.addDeck(deck);
     }
 
     @DELETE
     @Path("/{id}")
+    @Produces("application/json")
     public void removeDeck(@PathParam("id") Long id) {
         deckRepo.removeDeck(id);
     }
@@ -33,18 +38,12 @@ public class DeckEndpoint {
         return deckRepo.findById(id);
     }
 
-    @POST
+    @PATCH
     @Path("/{id}")
     @Consumes("application/json")
-    public void setCards(@PathParam("id") Long id, List<Card> cards) {
-        deckRepo.setCards(id, cards);
-    }
-
-    @GET
-    @Path("/cards/{id}")
     @Produces("application/json")
-    public List<Card> getCards(@PathParam("id") Long id) {
-        return deckRepo.getCards(id);
+    public Deck setCards(@PathParam("id") Long id, List<Card> cards) {
+        return deckRepo.setCards(id, cards);
     }
 
     @GET

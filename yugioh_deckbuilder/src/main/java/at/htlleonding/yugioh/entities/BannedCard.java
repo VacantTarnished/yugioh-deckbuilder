@@ -6,14 +6,10 @@ import java.util.List;
 @Entity
 public class BannedCard {
     @Id
-    @Column(name = "bannedCard_id")
     @GeneratedValue(generator = "BannedCard_seq", strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
     private Long allowedAmount;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<BanList> banLists;
 
     public Long getId() {
         return id;
@@ -39,11 +35,4 @@ public class BannedCard {
         this.allowedAmount = allowedAmount;
     }
 
-    public List<BanList> getBanLists() {
-        return banLists;
-    }
-
-    public void setBanLists(List<BanList> banLists) {
-        this.banLists = banLists;
-    }
 }

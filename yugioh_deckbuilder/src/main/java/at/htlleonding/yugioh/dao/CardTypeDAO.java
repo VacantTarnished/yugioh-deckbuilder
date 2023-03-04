@@ -29,15 +29,4 @@ public class CardTypeDAO {
         em.remove(cardType);
     }
 
-    @Transactional
-    public void setCards(Long cardTypeId, List<Card> cards) {
-        CardType cardType = findById(cardTypeId);
-        cardType.setCards(cards);
-        em.merge(cardType);
-    }
-
-    public List<Card> getCards(Long cardTypeId) {
-        CardType cardType = findById(cardTypeId);
-        return cardType.getCards();
-    }
 }

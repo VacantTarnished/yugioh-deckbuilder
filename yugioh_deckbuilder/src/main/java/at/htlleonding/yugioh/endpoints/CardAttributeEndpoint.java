@@ -33,17 +33,4 @@ public class CardAttributeEndpoint {
         return cardAttributeRepo.findById(id);
     }
 
-    @POST
-    @Path("/{cardAttributeId}")
-    @Consumes("application/json")
-    public void setCards(@PathParam("cardAttributeId") Long cardAttributeId, List<Card> cards) {
-        cardAttributeRepo.setCards(cardAttributeId, cards);
-    }
-
-    @GET
-    @Path("/cards/{id}")
-    @Produces("application/json")
-    public List<Card> getCards(@PathParam("id") Long id) {
-        return cardAttributeRepo.getCards(id);
-    }
 }
