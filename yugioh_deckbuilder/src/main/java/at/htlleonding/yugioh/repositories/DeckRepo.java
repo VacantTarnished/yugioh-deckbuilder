@@ -18,7 +18,7 @@ public class DeckRepo {
     }
 
     public void removeDeck(Long id) {
-        deckDAO.removeDeck(id);
+        deckDAO.removeDeck(deckDAO.findById(id));
     }
 
     public Deck findById(Long id) {

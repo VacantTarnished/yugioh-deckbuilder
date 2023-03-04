@@ -13,7 +13,7 @@ public class BanList {
 
     private Date date;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<BannedCard> bannedCards;
 
     public Long getId() {

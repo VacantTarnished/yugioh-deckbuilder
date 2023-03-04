@@ -18,7 +18,7 @@ public class PrintSetRepo {
     }
 
     public void removePrintSet(Long id) {
-        printSetDAO.removePrintSet(id);
+        printSetDAO.removePrintSet(printSetDAO.findById(id));
     }
 
     public PrintSet findById(Long id) {

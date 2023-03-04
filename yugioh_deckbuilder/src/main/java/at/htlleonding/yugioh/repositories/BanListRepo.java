@@ -18,7 +18,7 @@ public class BanListRepo {
     }
 
     public void removeBanList(Long id) {
-        banListDAO.removeBanList(id);
+        banListDAO.removeBanList(banListDAO.findById(id));
     }
 
     public BanList findById(Long id) {

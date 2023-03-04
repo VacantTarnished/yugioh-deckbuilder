@@ -25,7 +25,7 @@ public class CardAttributeDAO {
     }
 
     @Transactional
-    public void removeCardAttribute(Long cardAttribute) {
+    public void removeCardAttribute(CardAttribute cardAttribute) {
         em.remove(cardAttribute);
     }
 

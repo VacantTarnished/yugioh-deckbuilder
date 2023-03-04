@@ -17,7 +17,7 @@ public class CardRepo {
     }
 
     public void removeCard(Long id) {
-        cardDAO.removeCard(id);
+        cardDAO.removeCard(cardDAO.findById(id));
     }
 
     public Card findById(Long id) {

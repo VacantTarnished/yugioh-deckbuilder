@@ -26,7 +26,7 @@ public class BannedCardDAO {
     }
 
     @Transactional
-    public void removeBannedCard(Long bannedCard) {
+    public void removeBannedCard(BannedCard bannedCard) {
         em.remove(bannedCard);
     }
 

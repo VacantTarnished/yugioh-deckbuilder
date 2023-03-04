@@ -17,7 +17,7 @@ public class CardAttributeRepo {
     }
 
     public void removeCardAttribute(Long id) {
-        cardAttributeDAO.removeCardAttribute(id);
+        cardAttributeDAO.removeCardAttribute(cardAttributeDAO.findById(id));
     }
 
     public CardAttribute findById(Long id) {

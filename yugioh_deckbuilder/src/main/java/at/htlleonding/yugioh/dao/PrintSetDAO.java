@@ -25,7 +25,7 @@ public class PrintSetDAO {
     }
 
     @Transactional
-    public void removePrintSet(Long printSet) {
+    public void removePrintSet(PrintSet printSet) {
         em.remove(printSet);
     }
 

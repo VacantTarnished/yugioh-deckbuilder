@@ -25,7 +25,7 @@ public class DeckDAO {
     }
 
     @Transactional
-    public void removeDeck(Long deck) {
+    public void removeDeck(Deck deck) {
         em.remove(deck);
     }
 

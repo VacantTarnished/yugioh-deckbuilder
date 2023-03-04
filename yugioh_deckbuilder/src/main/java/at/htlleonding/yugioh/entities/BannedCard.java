@@ -12,7 +12,7 @@ public class BannedCard {
     private String name;
     private Long allowedAmount;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<BanList> banLists;
 
     public Long getId() {

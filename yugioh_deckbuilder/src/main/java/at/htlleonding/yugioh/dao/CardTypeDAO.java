@@ -25,7 +25,7 @@ public class CardTypeDAO {
     }
 
     @Transactional
-    public void removeCardType(Long cardType) {
+    public void removeCardType(CardType cardType) {
         em.remove(cardType);
     }
 

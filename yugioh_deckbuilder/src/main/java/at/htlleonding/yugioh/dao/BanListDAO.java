@@ -26,8 +26,8 @@ public class BanListDAO {
     }
 
     @Transactional
-    public void removeBanList(Long id) {
-        em.remove(id);
+    public void removeBanList(BanList banList) {
+        em.remove(banList);
     }
 
     public List<BannedCard> getBannedCards(Long banListId) {

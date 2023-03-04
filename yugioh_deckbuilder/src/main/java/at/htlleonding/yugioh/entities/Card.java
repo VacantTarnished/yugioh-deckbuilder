@@ -26,7 +26,7 @@ public class Card {
     private String imageURL;
     private String icon;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     private CardAttribute cardAttribute;
 
     @ManyToMany(cascade = CascadeType.PERSIST)

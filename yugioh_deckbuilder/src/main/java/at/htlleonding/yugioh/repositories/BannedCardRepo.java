@@ -18,7 +18,7 @@ public class BannedCardRepo {
     }
 
     public void removeBannedCard(Long id) {
-        bannedCardDAO.removeBannedCard(id);
+        bannedCardDAO.removeBannedCard(bannedCardDAO.findById(id));
     }
 
     public BannedCard findById(Long id) {

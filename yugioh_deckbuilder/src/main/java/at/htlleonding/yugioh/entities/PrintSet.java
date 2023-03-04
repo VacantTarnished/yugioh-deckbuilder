@@ -13,7 +13,7 @@ public class PrintSet {
     private String shortName;
     private String longName;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Card> cards;
 
     public Long getId() {
