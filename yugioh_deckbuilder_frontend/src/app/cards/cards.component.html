@@ -1,0 +1,49 @@
+<br>
+<h1>All Cards</h1>
+<br>
+
+<mat-form-field appearance="fill">
+  <mat-label>Summon Types</mat-label>
+  <mat-select [(value)]="filterSummonType">
+    <mat-option *ngFor="let type of summonTypes" [value]="type">
+      {{ type }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Rarity</mat-label>
+  <mat-select [(value)]="filterRarity">
+    <mat-option *ngFor="let rarity of rarityTypes" [value]="rarity">
+      {{ rarity }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Search" [(ngModel)]="filterText" />
+</mat-form-field>
+
+<button class="mat-form-field-infix" mat-flat-button color="primary" (click)="resetFilters()">
+  Reset Filters
+</button>
+
+
+<br />
+<br />
+<br />
+<br />
+
+<mat-card *ngIf="getCards().length === 0" class="nothing-found">
+  <mat-card-header>
+    <mat-card-title>No Cards Found</mat-card-title>
+  </mat-card-header>
+</mat-card>
+
+<mat-card *ngFor="let card of getCards()">
+  <mat-card-header>
+    <mat-card-title>{{ card.name }}</mat-card-title>
+    <mat-card-subtitle>{{ card.summonType }}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="{{ card.imageURL }}" [width]="250" />
+</mat-card>

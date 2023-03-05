@@ -1,28 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Card, CardRoot, CardsService } from '../cards.service';
-import { CardDetails, Deck, DeckRoot, DeckService } from '../deck.service';
+import { Card, CardsService, CardRoot } from '../cards.service';
 
 @Component({
-  selector: 'app-add-deck',
-  templateUrl: './add-deck.component.html',
-  styleUrls: ['./add-deck.component.css'],
+  selector: 'app-cards',
+  templateUrl: './cards.component.html',
+  styleUrls: ['./cards.component.css'],
 })
-export default class AddDeckComponent implements OnInit {
+export class CardsComponent implements OnInit {
   public cards: CardRoot = [];
-  public deck!: Deck;
-  public cardsToAdd: string[] = [];
-
   public filterText: String = '';
-
-  public deckName: String = '';
+  public filterSummonType: String = '';
+  public filterRarity: String = '';
 
   public summonTypes: String[] = [];
   public rarityTypes: String[] = [];
 
-  constructor(
-    public deckService: DeckService,
-    public cardService: CardsService
-  ) {}
+  constructor(public cardService: CardsService) {}
 
   ngOnInit(): void {
     this.loadAllCards();
@@ -30,10 +24,6 @@ export default class AddDeckComponent implements OnInit {
 
   public loadAllCards() {
     this.cardService.loadAllCards().subscribe((data) => (this.cards = data));
-  }
-
-  public addCardToDeck(cardId: string) {
-    this.cardsToAdd.push(cardId);
   }
 
   public getCards(): CardRoot {
@@ -45,7 +35,7 @@ export default class AddDeckComponent implements OnInit {
           this.summonTypes.push(card.summonType);
         }
       }
-      if (this.rarityTypes.includes(card.rarity) == false) {
+      if(this.rarityTypes.includes(card.rarity) == false){
         this.rarityTypes.push(card.rarity);
       }
     });
@@ -57,6 +47,23 @@ export default class AddDeckComponent implements OnInit {
           .includes(this.filterText.toLowerCase().toString())
       );
     }
+
+    if(this.filterSummonType !== '' && this.filterSummonType !== ' '){
+      result = result.filter((card) =>
+      card.summonType?.includes(this.filterSummonType.toString()))
+    }
+
+    if(this.filterRarity !== '' && this.filterRarity !== ' '){
+      result = result.filter((card) =>
+      card.rarity?.includes(this.filterRarity.toString()))
+    }
     return result;
+
+  }
+
+  public resetFilters(){
+    this.filterText = '';
+    this.filterSummonType = '';
+    this.filterRarity = '';
   }
 }

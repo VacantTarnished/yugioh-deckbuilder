@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -16,15 +17,18 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import { AddDeckComponent } from './add-deck/add-deck.component';
+import AddDeckComponent from './add-deck/add-deck.component';
 import { DecksComponent } from './decks/decks.component';
+import { CardsComponent } from './cards/cards.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
-  declarations: [AppComponent, AddDeckComponent, DecksComponent],
+  declarations: [AppComponent, AddDeckComponent, DecksComponent, CardsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
 
     MatCheckboxModule,
     MatButtonModule,
@@ -36,6 +40,7 @@ import { DecksComponent } from './decks/decks.component';
     MatCardModule,
     BrowserAnimationsModule,
     DragDropModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

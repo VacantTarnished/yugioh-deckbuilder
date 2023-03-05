@@ -1,74 +1,57 @@
+<br />
 <h1>Yu-Gi-Oh! Deckbuilder</h1>
 <br />
-<p>
-  <mat-form-field appearance="fill">
-    <mat-label>Deck Name:</mat-label>
-    <input matInput />
-  </mat-form-field>
-  <button mat-flat-button color="primary">Add new Deck</button>
-</p>
-<br />
-<div class="float-container">
-  <mat-card>
-    <mat-card-content>
-      <div class="example-container">
-        <h2>Main Deck:</h2>
+{{ cardsToAdd | json }}
 
-        <div
-          cdkDropList
-          #main="cdkDropList"
-          [cdkDropListData]="mainDeck"
-          [cdkDropListConnectedTo]="[allCards, side]"
-          class="example-list"
-          (cdkDropListDropped)="remove($event)"
-        >
-          <div class="example-box" *ngFor="let item of mainDeck" cdkDrag>
-            {{ item }}
-          </div>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
-  <br /><br />
-  <mat-card>
-    <mat-card-content>
-      <div class="example-container">
-        <h2>Side Deck:</h2>
-        <div
-          cdkDropList
-          #side="cdkDropList"
-          [cdkDropListData]="sideDeck"
-          [cdkDropListConnectedTo]="[allCards, main]"
-          class="example-list"
-          (cdkDropListDropped)="remove($event)"
-        >
-          <div class="example-box" *ngFor="let item of sideDeck" cdkDrag>
-            {{ item }}
-          </div>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
-</div>
-<div class="float-container">
-  <mat-card>
-    <mat-card-content>
-      <div class="example-container">
-        <h2>Cards:</h2>
 
-        <div
-          cdkDropList
-          #allCards="cdkDropList"
-          [cdkDropListData]="cards"
-          [cdkDropListConnectedTo]="[main, side]"
-          class="example-list"
-          (cdkDropListDropped)="remove($event)"
+<div class="row">
+  <div class="column">
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Deck Name:</mat-label>
+        <input matInput type="text" name="deckName" [(ngModel)]="deckName" />
+      </mat-form-field>
+      <button mat-flat-button color="primary">Add new Deck</button>
+    </p>
+    <br />
+    <br />
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Deck Name: {{ deckName }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p *ngFor="let card of cardsToAdd">
+          Name:  {{ card }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="column">
+    <mat-form-field>
+      <input matInput placeholder="Search" [(ngModel)]="filterText" />
+    </mat-form-field>
+    <br />
+    <mat-card *ngFor="let card of getCards()">
+      <mat-card-header>
+        <mat-card-title>{{ card.name }}</mat-card-title>
+        <mat-card-subtitle
+          >summon type: {{ card.summonType }}</mat-card-subtitle
         >
-          <div class="example-box" *ngFor="let item of cards" cdkDrag>
-            {{ item }}
-          </div>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
+        <button mat-mini-fab color="primary" (click)="addCardToDeck(card.name)">
+          +
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <p *ngIf="card.rarity === null">rarity: none</p>
+        <p>rarity: {{ card.rarity }}</p>
+        <p *ngIf="card.atk === null">atk: none</p>
+        <p *ngIf="card.atk !== null">atk: {{ card.atk }}</p>
+        <p *ngIf="card.def === null">def: none</p>
+        <p *ngIf="card.def !== null">def: {{ card.def }}</p>
+        <p *ngIf="card.level === null">level: none</p>
+        <p *ngIf="card.level !== null">level: {{ card.level }}</p>
+        <p>description: {{ card.description }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
