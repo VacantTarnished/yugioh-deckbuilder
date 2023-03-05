@@ -10,11 +10,7 @@ import { CardDetails, Deck, DeckRoot, DeckService } from '../deck.service';
 export default class AddDeckComponent implements OnInit {
   public cards: CardRoot = [];
   public deck!: Deck;
-  public cardsToAdd: string[] = [];
 
-  public filterText: String = '';
-
-  public deckName: String = '';
 
   public summonTypes: String[] = [];
   public rarityTypes: String[] = [];
@@ -32,31 +28,46 @@ export default class AddDeckComponent implements OnInit {
     this.cardService.loadAllCards().subscribe((data) => (this.cards = data));
   }
 
-  public addCardToDeck(cardId: string) {
-    this.cardsToAdd.push(cardId);
+  public addNewDeck() {
+    this.deckService.addNewDeck().subscribe();
   }
 
-  public getCards(): CardRoot {
-    let result: CardRoot = this.cards;
-
-    this.cards.forEach((card) => {
-      if (card.summonType != null) {
-        if (this.summonTypes.includes(card.summonType) == false) {
-          this.summonTypes.push(card.summonType);
+  public addCardToDeck(card: Card) {
+    if (
+      this.deckService.cardsToAdd.find(
+        (cardDetails) => cardDetails.card.id === card.id
+      )
+    ) {
+      this.deckService.cardsToAdd = this.deckService.cardsToAdd.map(
+        (cardDetails) => {
+          if (cardDetails.card.id === card.id) {
+            if (cardDetails.amount === 3) {
+              return cardDetails;
+            }
+            cardDetails.amount++;
+          }
+          return cardDetails;
         }
-      }
-      if (this.rarityTypes.includes(card.rarity) == false) {
-        this.rarityTypes.push(card.rarity);
-      }
-    });
-
-    if (this.filterText !== '' && this.filterText !== ' ') {
-      result = result.filter((card) =>
-        card.name
-          .toLocaleLowerCase()
-          .includes(this.filterText.toLowerCase().toString())
       );
+      return;
     }
-    return result;
+    this.deckService.cardsToAdd.push({
+      card: card,
+      amount: 1,
+    });
+  }
+
+  public removeCardFromDeck(card: Card) {
+    this.deckService.cardsToAdd = this.deckService.cardsToAdd.map(
+      (cardDetails) => {
+        if (cardDetails.card.id === card.id) {
+          cardDetails.amount--;
+        }
+        return cardDetails;
+      }
+    );
+    this.deckService.cardsToAdd = this.deckService.cardsToAdd.filter(
+      (cardDetails) => cardDetails.amount > 0
+    );
   }
 }

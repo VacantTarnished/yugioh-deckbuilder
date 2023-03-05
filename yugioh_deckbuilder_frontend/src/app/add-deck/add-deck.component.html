@@ -1,57 +1,33 @@
 <br />
 <h1>Yu-Gi-Oh! Deckbuilder</h1>
 <br />
-{{ cardsToAdd | json }}
-
-
-<div class="row">
-  <div class="column">
-    <p>
-      <mat-form-field appearance="fill">
-        <mat-label>Deck Name:</mat-label>
-        <input matInput type="text" name="deckName" [(ngModel)]="deckName" />
-      </mat-form-field>
-      <button mat-flat-button color="primary">Add new Deck</button>
-    </p>
-    <br />
-    <br />
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Deck Name: {{ deckName }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p *ngFor="let card of cardsToAdd">
-          Name:  {{ card }}
-        </p>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <div class="column">
-    <mat-form-field>
-      <input matInput placeholder="Search" [(ngModel)]="filterText" />
-    </mat-form-field>
-    <br />
-    <mat-card *ngFor="let card of getCards()">
-      <mat-card-header>
-        <mat-card-title>{{ card.name }}</mat-card-title>
-        <mat-card-subtitle
-          >summon type: {{ card.summonType }}</mat-card-subtitle
-        >
-        <button mat-mini-fab color="primary" (click)="addCardToDeck(card.name)">
-          +
-        </button>
-      </mat-card-header>
-      <mat-card-content>
-        <p *ngIf="card.rarity === null">rarity: none</p>
-        <p>rarity: {{ card.rarity }}</p>
-        <p *ngIf="card.atk === null">atk: none</p>
-        <p *ngIf="card.atk !== null">atk: {{ card.atk }}</p>
-        <p *ngIf="card.def === null">def: none</p>
-        <p *ngIf="card.def !== null">def: {{ card.def }}</p>
-        <p *ngIf="card.level === null">level: none</p>
-        <p *ngIf="card.level !== null">level: {{ card.level }}</p>
-        <p>description: {{ card.description }}</p>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
+<mat-form-field>
+  <input matInput placeholder="Deck Name" [(ngModel)]="deckService.deckName" />
+</mat-form-field>
+<button mat-flat-button color="primary" (click)="addNewDeck()">Add Deck</button>
+<br />
+<br />
+<table>
+  <tr>
+    <th>Card ID</th>
+    <th>Card Name</th>
+    <th>ATK</th>
+    <th>DEF</th>
+    <th>Level</th>
+    <th>Summon Type</th>
+    <th>Amount</th>
+  </tr>
+  <tr *ngFor="let card of cards">
+    <td>{{ card.id }}</td>
+    <td>{{ card.name }}</td>
+    <td>{{ card.atk }}</td>
+    <td>{{ card.def }}</td>
+    <td>{{ card.level }}</td>
+    <td>{{ card.summonType }}</td>
+    <td>
+      <button (click)="removeCardFromDeck(card)" >-</button>
+      1
+      <button (click)="addCardToDeck(card)">+</button>
+    </td>
+  </tr>
+</table>

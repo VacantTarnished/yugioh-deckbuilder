@@ -21,6 +21,10 @@ export interface CardDetails {
 })
 export class DeckService {
 
+  public cardsToAdd: CardDetails[] = [];
+  public deckName: string = '';
+
+
   constructor(private http: HttpClient) { }
 
   public loadAllDecks(): Observable<DeckRoot> {
@@ -28,6 +32,11 @@ export class DeckService {
   }
 
   public addNewDeck(): Observable<DeckRoot> {
-    return this.http.post<DeckRoot>('http://localhost:8080/YuGiOh-DeckBuilder/Deck/', {})
+    const deck: Deck = {
+      id: 0,
+      name: this.deckName,
+      cards: this.cardsToAdd
+    }
+    return this.http.post<DeckRoot>('http://localhost:8080/YuGiOh-DeckBuilder/Deck/', deck)
   }
 }
