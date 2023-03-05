@@ -20,6 +20,10 @@ export class DecksComponent implements OnInit {
     this.deckService.loadAllDecks().subscribe((data) => (this.decks = data));
   }
 
+  public deleteDeck(id: Number) {
+    this.deckService.deleteDeck(id).subscribe(this.ngOnInit);
+  }
+
 }
 
 

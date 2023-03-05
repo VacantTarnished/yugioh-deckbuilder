@@ -39,4 +39,8 @@ export class DeckService {
     }
     return this.http.post<DeckRoot>('http://localhost:8080/YuGiOh-DeckBuilder/Deck/', deck)
   }
+
+  public deleteDeck(id: Number): Observable<undefined> {
+    return this.http.delete<undefined>(`http://localhost:8080/YuGiOh-DeckBuilder/Deck/${id}`)
+  }
 }
