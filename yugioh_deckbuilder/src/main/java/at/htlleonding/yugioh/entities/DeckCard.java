@@ -10,11 +10,11 @@ public class DeckCard {
     @EmbeddedId
     private DeckCardId id = new DeckCardId();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @MapsId("deckId")
     private Deck deck;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @MapsId("cardId")
     private Card card;
 

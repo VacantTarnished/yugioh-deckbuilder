@@ -5,10 +5,13 @@ import at.htlleonding.yugioh.entities.Card;
 import at.htlleonding.yugioh.entities.Deck;
 import at.htlleonding.yugioh.entities.DeckCard;
 import at.htlleonding.yugioh.dto.DeckDTO;
+import org.hibernate.annotations.Cascade;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
+import javax.transaction.Transaction;
 import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,7 +31,10 @@ public class DeckDAO {
         List<DeckCard> newCards = new LinkedList<>();
         newDeck.setName(deck.getName());
 
+        em.persist(newDeck);
+
         System.out.println(deck.getName());
+        System.out.printf("%d DeckID%n", newDeck.getId());
 
         for (DeckCard card: deck.getCards()) {
             DeckCard newCard = new DeckCard();
@@ -43,6 +49,8 @@ public class DeckDAO {
 
             newCard.setCard(correctCard);
 
+            em.persist(newCard);
+
             newCards.add(newCard);
         }
 
@@ -52,7 +60,9 @@ public class DeckDAO {
     }
 
     @Transactional
-    public void removeDeck(Deck deck) {
+    public void removeDeck(Long id) {
+        Deck deck = em.find(Deck.class, id);
+
         em.remove(deck);
     }
 

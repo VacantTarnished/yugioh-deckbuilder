@@ -17,7 +17,7 @@ public class Deck {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"deck", "id"})
     private List<DeckCard> cards;
 
