@@ -21,7 +21,9 @@ export class DecksComponent implements OnInit {
   }
 
   public deleteDeck(id: Number) {
-    this.deckService.deleteDeck(id).subscribe(this.ngOnInit);
+    this.deckService.deleteDeck(id).subscribe();
+    this.ngOnInit();
+    this.ngOnInit();
   }
 
 }

@@ -18,7 +18,7 @@
     <th>Summon Type</th>
     <th>Amount</th>
   </tr>
-  <tr *ngFor="let card of cards">
+  <tr *ngFor="let card of cards; let i = index">
     <td>{{ card.id }}</td>
     <td>{{ card.name }}</td>
     <td>{{ card.atk }}</td>
@@ -26,9 +26,27 @@
     <td>{{ card.level }}</td>
     <td>{{ card.summonType }}</td>
     <td>
-      <button (click)="removeCardFromDeck(card)" >-</button>
-      1
-      <button (click)="addCardToDeck(card)">+</button>
+      <button
+        mat-button
+        [disabled]="deckService.cardsToAdd[i].amount === 0"
+        (click)="
+          deckService.cardsToAdd[i].amount =
+            deckService.cardsToAdd[i].amount - 1
+        "
+      >
+        -
+      </button>
+      <input type="number" [disabled]="true" [(ngModel)]="deckService.cardsToAdd[i].amount" />
+      <button
+        mat-button
+        [disabled]="deckService.cardsToAdd[i].amount === 3"
+        (click)="
+          deckService.cardsToAdd[i].amount =
+            deckService.cardsToAdd[i].amount + 1
+        "
+      >
+        +
+      </button>
     </td>
   </tr>
 </table>

@@ -57,4 +57,7 @@ export class CardsService {
     return this.http.get<CardRoot>('http://localhost:8080/YuGiOh-DeckBuilder/Card/')
   }
 
+  public loadCard(id: number): Observable<Card> {
+    return this.http.get<Card>('http://localhost:8080/YuGiOh-DeckBuilder/Card/' + id)
+  }
 }

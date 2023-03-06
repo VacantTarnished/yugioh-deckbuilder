@@ -1,3 +1,16 @@
+<br>
 <h1>Yu-Gi-Oh! Deckbuilder</h1>
+<br>
 
-{{deck | json}}
+
+<h2>Deck Name: {{deck.name}}</h2>
+
+<mat-card *ngFor="let card of deck.cards">
+  <mat-card-title>{{card.card.name}}</mat-card-title>
+  <mat-card-subtitle>Amount: {{card.amount}}</mat-card-subtitle>
+  <mat-card-content>
+    <img mat-card-image src="{{ card.card.imageURL }}" [width]="250" />
+  </mat-card-content>
+</mat-card>
+
+
