@@ -28,7 +28,7 @@ public class DeckRepo {
         return deckDAO.findById(id);
     }
 
-    public Deck setCards(Long deckId, List<Card> cards) {
+    public Deck setCards(Long deckId, List<DeckCard> cards) {
         return deckDAO.setCards(deckId, cards);
     }
 

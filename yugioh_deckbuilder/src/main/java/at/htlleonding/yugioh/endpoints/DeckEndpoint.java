@@ -42,7 +42,7 @@ public class DeckEndpoint {
     @Path("/{id}")
     @Consumes("application/json")
     @Produces("application/json")
-    public Deck setCards(@PathParam("id") Long id, List<Card> cards) {
+    public Deck setCards(@PathParam("id") Long id, List<DeckCard> cards) {
         return deckRepo.setCards(id, cards);
     }
 

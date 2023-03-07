@@ -67,22 +67,24 @@ public class DeckDAO {
     }
 
     @Transactional
-    public Deck setCards(Long deckId, List<Card> cards) {
+    public Deck setCards(Long deckId, List<DeckCard> cards) {
         List<DeckCard> deckCards = new LinkedList<>();
         Deck deck = findById(deckId);
 
+        for (DeckCard card: cards) {
+            DeckCard newCard = new DeckCard();
+            DeckCardId newId = new DeckCardId(deckId, card.getCard().getId());
+            newCard.setId(newId);
+            newCard.setDeck(deck);
+            newCard.setAmount(card.getAmount());
 
-        for (Card card : cards) {
-            DeckCard deckCard = new DeckCard();
+            Card correctCard = em.find(Card.class, card.getCard().getId());
 
-            deckCard.getId().setCardId(card.getId());
-            deckCard.getId().setDeckId(deckId);
-            deckCard.setDeck(deck);
-            deckCard.setCard(card);
+            newCard.setCard(correctCard);
 
-            em.persist(deckCard);
+            em.persist(newCard);
 
-            deckCards.add(deckCard);
+            deckCards.add(newCard);
         }
 
         deck.setCards(deckCards);
