@@ -1,4 +1,3 @@
-/*formatting for a table with thin black borders*/
 table{
   width: 100%;
 }
@@ -19,6 +18,10 @@ th{
   background-color: lightsteelblue;
 }
 
-input{
+input.number-input {
   width: 30px;
+}
+
+button.add-button {
+  margin-left: 20px;
 }

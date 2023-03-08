@@ -22,10 +22,9 @@ import { DecksComponent } from './decks/decks.component';
 import { CardsComponent } from './cards/cards.component';
 import {MatSelectModule} from '@angular/material/select';
 import { DetailedDeckInfoComponent } from './decks/detailed-deck-info/detailed-deck-info.component';
-import { EditDeckComponent } from './decks/edit-deck/edit-deck.component';
 
 @NgModule({
-  declarations: [AppComponent, AddDeckComponent, DecksComponent, CardsComponent, DetailedDeckInfoComponent, EditDeckComponent],
+  declarations: [AppComponent, AddDeckComponent, DecksComponent, CardsComponent, DetailedDeckInfoComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
