@@ -4,6 +4,9 @@
 
 
 <h2>Deck Name: {{deck.name}}</h2>
+<button mat-flat-button color="primary" routerLink="/decks/edit-deck/{{deck.id}}">Edit</button>
+<br>
+<br>
 
 <mat-card *ngFor="let card of deck.cards">
   <mat-card-title>{{card.card.name}}</mat-card-title>

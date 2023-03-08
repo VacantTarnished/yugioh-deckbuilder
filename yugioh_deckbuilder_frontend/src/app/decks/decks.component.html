@@ -2,7 +2,11 @@
 <h1>Yu-Gi-Oh! Deckbuilder</h1>
 <h2>All Decks</h2>
 <br />
-<mat-card *ngFor="let deck of decks">
+<mat-form-field>
+  <input matInput placeholder="Search" [(ngModel)]="filterText" />
+</mat-form-field>
+
+<mat-card *ngFor="let deck of getDecks()">
   <mat-card-title>{{deck.name}}</mat-card-title>
   <mat-card-actions>
     <button mat-flat-button color="primary" routerLink="/decks/detailed-deck-info/{{deck.id}}">View</button>

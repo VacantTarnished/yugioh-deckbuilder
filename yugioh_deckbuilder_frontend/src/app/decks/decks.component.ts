@@ -9,6 +9,7 @@ import { DeckService, DeckRoot } from '../deck.service';
 export class DecksComponent implements OnInit {
 
   public decks!: DeckRoot;
+  public filterText: string = "";
 
   constructor(public deckService: DeckService) { }
 
@@ -23,7 +24,10 @@ export class DecksComponent implements OnInit {
   public deleteDeck(id: Number) {
     this.deckService.deleteDeck(id).subscribe();
     this.ngOnInit();
-    this.ngOnInit();
+  }
+
+  public getDecks(): DeckRoot {
+    return this.decks.filter((deck) => deck.name.toLocaleLowerCase().includes(this.filterText.toLowerCase()));
   }
 
 }

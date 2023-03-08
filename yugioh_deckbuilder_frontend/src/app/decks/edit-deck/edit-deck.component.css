@@ -1,0 +1,24 @@
+/*formatting for a table with thin black borders*/
+table{
+  width: 100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: left;
+}
+td:not(:nth-child(2)) {
+    text-align: center;
+    padding: 8px;
+}
+
+th{
+  text-align: center;
+  padding: 8px;
+  background-color: lightsteelblue;
+}
+
+input{
+  width: 30px;
+}
