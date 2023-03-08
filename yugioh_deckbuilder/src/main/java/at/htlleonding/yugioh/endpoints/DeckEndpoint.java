@@ -38,14 +38,6 @@ public class DeckEndpoint {
         return deckRepo.findById(id);
     }
 
-    @PATCH
-    @Path("/{id}")
-    @Consumes("application/json")
-    @Produces("application/json")
-    public Deck setCards(@PathParam("id") Long id, List<DeckCard> cards) {
-        return deckRepo.setCards(id, cards);
-    }
-
     @GET
     @Path("/")
     @Produces("application/json")

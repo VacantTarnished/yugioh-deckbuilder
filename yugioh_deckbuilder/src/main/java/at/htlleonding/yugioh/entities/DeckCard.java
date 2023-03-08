@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class DeckCard {
     @EmbeddedId
-    private DeckCardId id = new DeckCardId();
+    private DeckCardId id;
 
     @ManyToOne(cascade = CascadeType.DETACH)
     @MapsId("deckId")
