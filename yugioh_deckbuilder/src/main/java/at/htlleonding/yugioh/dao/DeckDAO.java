@@ -15,6 +15,7 @@ import javax.transaction.Transaction;
 import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 @ApplicationScoped
 public class DeckDAO {
@@ -64,31 +65,6 @@ public class DeckDAO {
         Deck deck = em.find(Deck.class, id);
 
         em.remove(deck);
-    }
-
-    @Transactional
-    public Deck setCards(Long deckId, List<DeckCard> cards) {
-        List<DeckCard> deckCards = new LinkedList<>();
-        Deck deck = findById(deckId);
-
-        for (DeckCard card: cards) {
-            DeckCard newCard = new DeckCard();
-            DeckCardId newId = new DeckCardId(deckId, card.getCard().getId());
-            newCard.setId(newId);
-            newCard.setDeck(deck);
-            newCard.setAmount(card.getAmount());
-
-            Card correctCard = em.find(Card.class, card.getCard().getId());
-
-            newCard.setCard(correctCard);
-
-            em.persist(newCard);
-
-            deckCards.add(newCard);
-        }
-
-        deck.setCards(deckCards);
-        return em.merge(deck);
     }
 
     public List<DeckCard> getCards(Long id) {
