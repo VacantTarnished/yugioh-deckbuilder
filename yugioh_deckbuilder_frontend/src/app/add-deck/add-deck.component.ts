@@ -31,4 +31,11 @@ export default class AddDeckComponent implements OnInit {
     this.deckService.addNewDeck().subscribe();
   }
 
+  public anyAmountOverZero(): Boolean {
+
+    let overZero = this.deckService.cardsToAdd.filter(c => c.amount > 0).length > 0;
+
+    return overZero
+  }
+
 }

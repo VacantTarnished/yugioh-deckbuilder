@@ -5,7 +5,7 @@
 <mat-form-field>
   <input matInput placeholder="Deck Name" [(ngModel)]="deckService.deckName" />
 </mat-form-field>
-<button mat-flat-button color="primary" class="add-button" (click)="addNewDeck()">Add Deck</button>
+<button mat-flat-button color="primary" class="add-button" (click)="addNewDeck()" [disabled]="!this.anyAmountOverZero()">Add Deck</button>
 <br />
 <br />
 <table>
