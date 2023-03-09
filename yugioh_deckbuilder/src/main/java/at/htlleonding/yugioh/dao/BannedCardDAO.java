@@ -6,6 +6,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @ApplicationScoped
@@ -14,7 +16,13 @@ public class BannedCardDAO {
     EntityManager em;
 
     public BannedCard findById(Long id) {
-        return em.find(BannedCard.class, id);
+        BannedCard bc = em.find(BannedCard.class, id);
+
+        if (bc == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+        return bc;
     }
 
     @Transactional

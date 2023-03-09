@@ -1,13 +1,13 @@
 package at.htlleonding.yugioh.dao;
 
-import at.htlleonding.yugioh.entities.Card;
 import at.htlleonding.yugioh.entities.CardAttribute;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.util.List;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 @ApplicationScoped
 public class CardAttributeDAO {
@@ -15,7 +15,13 @@ public class CardAttributeDAO {
     EntityManager em;
 
     public CardAttribute findById(Long id) {
-        return em.find(CardAttribute.class, id);
+        CardAttribute ca = em.find(CardAttribute.class, id);
+
+        if (ca == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+        return ca;
     }
 
     @Transactional

@@ -13,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
 import javax.transaction.Transaction;
 import javax.transaction.Transactional;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -23,11 +25,22 @@ public class DeckDAO {
     EntityManager em;
 
     public Deck findById(Long id) {
-        return em.find(Deck.class, id);
+        Deck deck = em.find(Deck.class, id);
+
+        if (deck == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+        return deck;
     }
 
     @Transactional
     public void addDeck(DeckDTO deck) {
+        if (deck.getCards() == null || deck.getCards().size() == 0) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+
+
         Deck newDeck = new Deck();
         List<DeckCard> newCards = new LinkedList<>();
         newDeck.setName(deck.getName());
@@ -64,15 +77,30 @@ public class DeckDAO {
     public void removeDeck(Long id) {
         Deck deck = em.find(Deck.class, id);
 
+        if (deck == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
         em.remove(deck);
     }
 
     public List<DeckCard> getCards(Long id) {
         Deck deck = findById(id);
+
+        if (deck == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
         return deck.getCards();
     }
 
     public List<Deck> getAllDecks() {
-        return em.createNativeQuery("SELECT * FROM deck", Deck.class).getResultList();
+        List<Deck> decks = em.createNativeQuery("SELECT * FROM deck", Deck.class).getResultList();
+
+        if (decks == null || decks.size() == 0) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+        return decks;
     }
 }

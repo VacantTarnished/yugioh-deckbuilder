@@ -6,6 +6,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @ApplicationScoped
@@ -14,11 +16,21 @@ public class CardDAO {
     EntityManager em;
 
     public Card findById(Long id) {
-        return em.find(Card.class, id);
+        Card card = em.find(Card.class, id);
+
+        if (card == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+        return card;
     }
 
     @Transactional
     public Card addCard(Card card) {
+        if (card == null) {
+            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+        }
+
         em.persist(card);
         return card;
     }
