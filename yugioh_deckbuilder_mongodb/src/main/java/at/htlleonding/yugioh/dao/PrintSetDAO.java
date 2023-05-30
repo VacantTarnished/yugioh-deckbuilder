@@ -1,6 +1,7 @@
 package at.htlleonding.yugioh.dao;
 
 import at.htlleonding.yugioh.entities.PrintSet;
+import io.quarkus.mongodb.panache.PanacheMongoEntityBase;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
 import io.quarkus.panache.common.Parameters;
 import org.bson.types.ObjectId;
@@ -14,7 +15,7 @@ import javax.ws.rs.core.Response;
 public class PrintSetDAO implements PanacheMongoRepository<PrintSet> {
 
     public PrintSet findById(Long id) {
-        PrintSet printSet = findByIdOptional(new ObjectId(String.valueOf(id))).orElse(null);
+        PrintSet printSet = find("_id", id).firstResult();
 
         if (printSet == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);

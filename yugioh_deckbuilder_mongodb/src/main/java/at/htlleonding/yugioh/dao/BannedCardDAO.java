@@ -2,6 +2,7 @@ package at.htlleonding.yugioh.dao;
 
 import at.htlleonding.yugioh.entities.BannedCard;
 
+import io.quarkus.mongodb.panache.PanacheMongoEntityBase;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
 import org.bson.types.ObjectId;
 
@@ -16,7 +17,7 @@ import java.util.List;
 public class BannedCardDAO implements PanacheMongoRepository<BannedCard> {
 
     public BannedCard findById(Long id) {
-        BannedCard bc = findByIdOptional(new ObjectId(String.valueOf(id))).orElse(null);
+        BannedCard bc = find("_id", id).firstResult();
 
         if (bc == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);

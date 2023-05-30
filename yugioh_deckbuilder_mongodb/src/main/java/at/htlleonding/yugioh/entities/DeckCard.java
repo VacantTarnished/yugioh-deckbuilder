@@ -1,7 +1,6 @@
 package at.htlleonding.yugioh.entities;
 
 import at.htlleonding.yugioh.embeddable.DeckCardId;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.quarkus.mongodb.panache.PanacheMongoEntity;
 import io.quarkus.mongodb.panache.common.MongoEntity;
 

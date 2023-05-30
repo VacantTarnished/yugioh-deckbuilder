@@ -2,6 +2,7 @@ package at.htlleonding.yugioh.dao;
 
 import at.htlleonding.yugioh.entities.*;
 
+import io.quarkus.mongodb.panache.PanacheMongoEntityBase;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
 import org.bson.types.ObjectId;
 
@@ -15,7 +16,7 @@ import java.util.List;
 public class CardDAO implements PanacheMongoRepository<Card> {
 
     public Card findById(Long id) {
-        Card card = findByIdOptional(new ObjectId(String.valueOf(id))).orElse(null);
+        Card card = find("_id", id).firstResult();
 
         if (card == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);

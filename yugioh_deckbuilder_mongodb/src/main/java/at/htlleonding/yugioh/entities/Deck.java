@@ -1,8 +1,5 @@
 package at.htlleonding.yugioh.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.quarkus.mongodb.panache.PanacheMongoEntity;
 import io.quarkus.mongodb.panache.common.MongoEntity;
 
@@ -20,7 +17,6 @@ public class Deck extends PanacheMongoEntity {
     private String name;
 
     @OneToMany(cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties({"deck", "id"})
     private List<DeckCard> cards;
 
     public Long getId() {

@@ -6,6 +6,7 @@ import at.htlleonding.yugioh.entities.Deck;
 import at.htlleonding.yugioh.entities.DeckCard;
 import at.htlleonding.yugioh.dto.DeckDTO;
 
+import io.quarkus.mongodb.panache.PanacheMongoEntityBase;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
 import io.quarkus.panache.common.Parameters;
 import org.bson.types.ObjectId;
@@ -20,7 +21,7 @@ import java.util.List;
 public class DeckDAO implements PanacheMongoRepository<Deck> {
 
     public Deck findById(Long id) {
-        Deck deck = findByIdOptional(new ObjectId(String.valueOf(id))).orElse(null);
+        Deck deck = find("_id", id).firstResult();
 
         if (deck == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
